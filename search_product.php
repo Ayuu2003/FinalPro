@@ -10,31 +10,21 @@ while ($data = mysqli_fetch_assoc($cata_info)) {
     $cataDatas[] = $data;
 }
 
+$search_results = array();
 
-
-
-if(isset($_GET['search'])){
+if (isset($_GET['search'])) {
     $keyword = $_GET['keyword'];
-    if(!empty($keyword)){
+    if (!empty($keyword)) {
         $search_query = $obj->search_product($keyword);
-
-   
-    
-    $search_results = array();
-    while($search = mysqli_fetch_assoc($search_query)){
-        $search_results[]=$search;
-    }
-
-    }else{
+        while ($search = mysqli_fetch_assoc($search_query)) {
+            $search_results[] = $search;
+        }
+    } else {
         header('location:all_product.php');
     }
 }
 
-
-
-
 ?>
-
 
 <?php
 include_once("includes/head.php");
@@ -71,21 +61,16 @@ include_once("includes/head.php");
         <div id="main-content" class="main-content">
 
             <!--Hero Section-->
-          
-
 
             <!--Navigation section-->
-           
-
 
             <!-- Product -->
             <div class="container">
 
-            <?php 
-                $search_item =count($search_results);
-             
+                <?php
+                $search_item = count($search_results);
                 echo "{$search_item} Items Found";
-            ?>
+                ?>
 
                 <div class="product-category grid-style">
 
@@ -104,12 +89,11 @@ include_once("includes/head.php");
                                             </a>
                                         </div>
                                         <div class="info">
-                                        <b class="categories"> <?php echo $search_pdt['ctg_name'] ?> </b>
-                                            
+                                            <b class="categories"> <?php echo $search_pdt['ctg_name'] ?> </b>
+
                                             <h4 class="product-title"><a href="single_product.php?status=singleproduct&&id=<?php echo $search_pdt['pdt_id'] ?>" class="pr-name"><?php echo $search_pdt['pdt_name'] ?></a></h4>
                                             <div class="price">
                                                 <ins><span class="price-amount"><span class="currencySymbol">₹. </span><?php echo $search_pdt['pdt_price'] ?></span></ins>
-
                                             </div>
                                             <div class="shipping-info">
                                                 <p class="shipping-day">3-Day Shipping</p>
@@ -117,14 +101,12 @@ include_once("includes/head.php");
                                             </div>
                                             <div class="slide-down-box">
                                                 <p class="message">All products are carefully selected to ensure food safety.</p>
-                                               
                                             </div>
                                         </div>
                                     </div>
                                 </li>
 
                             <?php } ?>
-
 
                         </ul>
                     </div>
@@ -144,10 +126,6 @@ include_once("includes/head.php");
 
                 </div>
 
-
-
-
-
             </div>
         </div>
     </div>
@@ -166,7 +144,6 @@ include_once("includes/head.php");
     <?php
     include_once("includes/mobile_global.php")
     ?>
-
 
     <!-- Scroll Top Button -->
     <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a>
